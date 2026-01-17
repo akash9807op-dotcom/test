@@ -3,34 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome 👀</title>
-
+  <title>Gift for Priyanshu 🎁</title>
+  
   <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <div class="overlay"></div>
+
   <div class="container">
     <div class="card">
-      <h1>Welcome MotherFucker😇</h1>
-      <h2>Upper Assman Niche Chauhan 😂 Kyu Priyanshu Chauhan</h2>
-      <p class="sub">This is my new homepage… try it!</p>
-
-      <button id="startBtn">Click to Continue ✅</button>
-      <p class="hint">Totally safe... trust me 😇</p>
+      
+      <div id="initial-view">
+        <h1 class="vibing">🎉 Surprise for Priyanshu! 🎉</h1>
+        <h2>(Upper Assman Niche Chauhan)</h2>
+        <p class="sub">Click below to claim your ₹5000 Gift Card 🤑</p>
+        
+        <button id="startBtn" class="pulse-button">CLAIM NOW ✅</button>
+        <p class="hint">100% Real (Trust me bro) 😇</p>
+      </div>
 
       <div id="loading" class="hidden">
         <div class="loader"></div>
-        <p class="loading-text">Loading secret content...</p>
+        <p id="hack-text" class="hack-text">Initializing...</p>
+        <div class="progress-bar"><div class="fill"></div></div>
       </div>
 
       <div id="result" class="hidden">
-        <h2>😂 OHH Pencho !</h2>
-        <p>You’ve officially been pranked 😈</p>
-        <button id="replayBtn">Replay 🔊</button>
+        <h1 class="rainbow-text">😂 OHH PENCHO! 😂</h1>
+        <h2 style="color: #ff4757;">YOU JUST GOT PRANKED</h2>
+        <p>Tere phone ka data udd gya bhai... 👋</p>
+        
+        <img src="https://media.tenor.com/M6L2M5tQkQkAAAAM/laughing-laugh.gif" alt="laughing" style="width: 100%; border-radius: 10px; margin: 10px 0;">
+        
+        <button id="replayBtn">Play Again 🔊</button>
       </div>
 
       <audio id="prankAudio" preload="auto">
         <source src="{{ url_for('static', path='prank.mp3') }}" type="audio/mpeg">
-        Your browser does not support audio.
       </audio>
     </div>
   </div>
@@ -38,4 +49,3 @@
   <script src="{{ url_for('static', path='script.js') }}"></script>
 </body>
 </html>
-
