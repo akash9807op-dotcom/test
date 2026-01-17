@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome 👀</title>
+
+  <link rel="stylesheet" href="{{ url_for(path='style.css') }}">
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <h1>Welcome MotherFucker😇</h1>
+      <p class="sub">This is my new homepage… try it!</p>
+
+      <button id="startBtn">Click to Continue ✅</button>
+      <p class="hint">Totally safe... trust me 😇</p>
+
+      <div id="loading" class="hidden">
+        <div class="loader"></div>
+        <p class="loading-text">Loading secret content...</p>
+      </div>
+
+      <div id="result" class="hidden">
+        <h2>😂 OHH Pencho !</h2>
+        <p>You’ve officially been pranked 😈</p>
+        <button id="replayBtn">Replay 🔊</button>
+      </div>
+
+      <!-- ✅ Audio -->
+      <audio id="prankAudio" preload="auto">
+        <source src="{{ url_for( path='prank.mp3') }}" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+    </div>
+  </div>
+
+  <script src="{{ url_for(path='script.js') }}"></script>
+</body>
+</html>
