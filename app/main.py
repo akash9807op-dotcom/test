@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from . import models
 from .database import engine
 from .routers import posts,users,login,vote
-
+import os
 from dotenv import load_dotenv
 load_dotenv()
 from fastapi.staticfiles import StaticFiles
@@ -126,5 +126,6 @@ app.include_router(users.router)
     
 #     # If the loop finishes and we didn't find the ID...
 #     return {"message": "Post not found"}
+
 
 
