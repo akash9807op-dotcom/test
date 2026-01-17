@@ -9,7 +9,7 @@ load_dotenv()
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 models.Base.metadata.create_all(bind=engine)
-
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 app=FastAPI()# app is instance of fastapi application 
 
@@ -126,4 +126,5 @@ app.include_router(users.router)
     
 #     # If the loop finishes and we didn't find the ID...
 #     return {"message": "Post not found"}
+
 
