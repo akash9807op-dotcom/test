@@ -4,23 +4,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
-
-# Internal imports
 from . import models
 from .database import engine
 from .routers import posts, users, login, vote
-
-load_dotenv()
-
-models.Base.metadata.create_all(bind=engine)
-
-# --- FIX START: Create Absolute Paths ---
-# Get the location of THIS file (main.py)
+load_doten()
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Create full paths to static and templates
-static_path = os.path.join(current_dir, "static")
 templates_path = os.path.join(current_dir, "templates")
-# --- FIX END ---
 
 app = FastAPI()
 
@@ -33,8 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Use the absolute paths we created above
-app.mount("/static", StaticFiles(directory=static_path), name="static")
 templates = Jinja2Templates(directory=templates_path)
 
 @app.get('/')
@@ -46,3 +33,4 @@ app.include_router(vote.router)
 app.include_router(login.router)
 app.include_router(posts.router)
 app.include_router(users.router)
+
