@@ -1,51 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gift for Priyanshu 🎁</title>
-  
-  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash | Backend Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .greeting {
+            font-size: 20px;
+            color: #00f2fe;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .name {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #fff, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .title {
+            font-size: 42px;
+            color: #a8a8a8;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #c7c7c7;
+            max-width: 600px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #0f0c29;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border-color: #00f2fe;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 242, 254, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .skills {
+            margin-top: 80px;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #fff, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 242, 254, 0.5);
+        }
+
+        .skill-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .skill-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .skill-desc {
+            color: #a8a8a8;
+            line-height: 1.6;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.1));
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #a8a8a8;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 48px;
+            }
+            
+            .title {
+                font-size: 28px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">&lt;Akash/&gt;</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
 
-  <div class="overlay"></div>
+        <section class="hero">
+            <div class="floating-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="greeting">Hi there, I'm</div>
+                <h1 class="name">Akash</h1>
+                <h2 class="title">Backend Developer</h2>
+                <p class="description">
+                    I craft robust APIs and scalable server-side solutions. Specialized in Python, FastAPI, and building systems that power modern applications. Let's turn your ideas into reality with clean, efficient code.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#skills" class="btn btn-secondary">View My Work</a>
+                </div>
+            </div>
+        </section>
 
-  <div class="container">
-    <div class="card">
-      
-      <div id="initial-view">
-        <h1 class="vibing">🎉 Surprise for Priyanshu! 🎉</h1>
-        <h2>(Upper Assman Niche Chauhan)</h2>
-        <p class="sub">Click below to claim your ₹5000 Gift Card 🤑</p>
-        
-        <button id="startBtn" class="pulse-button">CLAIM NOW ✅</button>
-        <p class="hint">100% Real (Trust me bro) 😇</p>
-      </div>
-
-      <div id="loading" class="hidden">
-        <div class="loader"></div>
-        <p id="hack-text" class="hack-text">Initializing...</p>
-        <div class="progress-bar"><div class="fill"></div></div>
-      </div>
-
-      <div id="result" class="hidden">
-        <h1 class="rainbow-text">😂 OHH PENCHO! 😂</h1>
-        <h2 style="color: #ff4757;">YOU JUST GOT PRANKED</h2>
-        <p>Tere phone ka data udd gya bhai... 👋</p>
-        
-        <img src="https://media.tenor.com/M6L2M5tQkQkAAAAM/laughing-laugh.gif" alt="laughing" style="width: 100%; border-radius: 10px; margin: 10px 0;">
-        
-        <button id="replayBtn">Play Again 🔊</button>
-      </div>
-
-      <audio id="prankAudio" preload="auto">
-        <source src="{{ url_for('static', path='prank.mp3') }}" type="audio/mpeg">
-      </audio>
+        <section class="skills" id="skills">
+            <h2 class="section-title">What I Do Best</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <h3 class="skill-name">API Development</h3>
+                    <p class="skill-desc">Building RESTful APIs with FastAPI, ensuring high performance and scalability for your applications.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🗄️</div>
+                    <h3 class="skill-name">Database Design</h3>
+                    <p class="skill-desc">Designing efficient database schemas with PostgreSQL, MongoDB, and optimizing complex queries.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔐</div>
+                    <h3 class="skill-name">Authentication & Security</h3>
+                    <p class="skill-desc">Implementing secure authentication systems with JWT, OAuth, and following security best practices.</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">☁️</div>
+                    <h3 class="skill-name">Cloud Deployment</h3>
+                    <p class="skill-desc">Deploying applications on AWS, Railway, and Render with Docker and CI/CD pipelines.</p>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
 
-  <script src="{{ url_for('static', path='script.js') }}"></script>
+    <footer>
+        <p>&copy; 2026 Akash. Built with passion and Python.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const skillCards = document.querySelectorAll('.skill-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        skillCards.forEach(card => observer.observe(card));
+    </script>
 </body>
 </html>
